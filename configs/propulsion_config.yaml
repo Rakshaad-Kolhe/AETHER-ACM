@@ -1,0 +1,3 @@
+propulsion:
+  isp: 300
+  max_thrust: 0.5

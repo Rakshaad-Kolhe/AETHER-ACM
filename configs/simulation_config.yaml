@@ -1,0 +1,4 @@
+simulation:
+  start_time: 2025-01-01T00:00:00Z
+  end_time: 2025-01-02T00:00:00Z
+  time_step_seconds: 60
