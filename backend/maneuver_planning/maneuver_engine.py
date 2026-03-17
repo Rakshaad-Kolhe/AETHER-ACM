@@ -1,5 +1,6 @@
 import numpy as np
 
+from backend.analytics.risk_scoring import compute_risk_score, rank_conjunctions
 from backend.domain.maneuver import Maneuver
 from backend.maneuver_planning.avoidance.phasing_maneuver import (
     compute_phasing_delta_v,
@@ -15,8 +16,13 @@ class ManeuverEngine:
         satellite_map = {sat.id: sat for sat in satellites}
         maneuvers = []
         planned_satellites = set()
+        # Processing high-risk events first improves safety and fuel efficiency.
+        sorted_events = rank_conjunctions(conjunction_events)
 
-        for event in conjunction_events:
+        for event in sorted_events:
+            if compute_risk_score(event) < 0.2:
+                continue
+
             satellite_id = str(event.satellite_id)
             if satellite_id in planned_satellites:
                 continue
