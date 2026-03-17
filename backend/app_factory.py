@@ -1,4 +1,9 @@
+from fastapi import FastAPI
+
+from backend.api.router import api_router
+
+
 def create_app():
-    from fastapi import FastAPI
     app = FastAPI()
+    app.include_router(api_router)
     return app
