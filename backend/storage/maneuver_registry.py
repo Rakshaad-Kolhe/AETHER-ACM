@@ -47,14 +47,15 @@ class ManeuverRegistry:
             for maneuver in self._maneuvers.values()
             if maneuver.satellite_id == satellite_id
         ]
+
     def get_recent_maneuvers(self, limit: int = 50) -> List[Maneuver]:
         return list(self._maneuvers.values())[-limit:]
-
 
     def update_metadata(self, maneuver_id: ManeuverId, metadata: Dict[str, Any]) -> None:
         maneuver = self._maneuvers.get(maneuver_id)
         if maneuver is not None:
             maneuver.metadata.update(metadata)
+
     def get_maneuvers_by_status(self, status: str) -> List[Maneuver]:
         return [
             maneuver
