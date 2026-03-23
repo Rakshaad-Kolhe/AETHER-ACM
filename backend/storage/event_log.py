@@ -4,6 +4,13 @@ class Event:
         self.event_type = event_type
         self.data = data
 
+    def to_dict(self):
+        return {
+            "timestamp": self.timestamp,
+            "event_type": self.event_type,
+            "data": self.data
+        }
+
 
 class EventLog:
     def __init__(self):
@@ -25,6 +32,9 @@ class EventLog:
 
     def get_events_in_time_range(self, start, end):
         return [event for event in self._events if start <= event.timestamp <= end]
+
+    def get_recent_events(self, limit=50):
+        return self._events[-limit:]
 
     def clear(self):
         self._events.clear()
